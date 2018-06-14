@@ -108,7 +108,7 @@ public class MyCameraActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // STEP 1 Start thread
+        // RUNNING STEP 1 Start thread
         startBackgroundThread();
 
         if (mTextureView.isAvailable()) {
@@ -243,10 +243,10 @@ public class MyCameraActivity extends AppCompatActivity {
 
                 final Size largest = Collections.max(Arrays.asList(jpegSizes), new CameraUtils.CompareSizesByArea());
 
-                // STEP 2 Set camera id
+                // RUNNING STEP 2 Set camera id
                 mCameraId = cameraId;
 
-                // STEP 3 Set ImageReader
+                // RUNNING STEP 3 Set ImageReader
                 setPhotoSize(largest);
 
                 setOrientation(width, height, largest, surfaceSizes);
@@ -280,7 +280,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 throw new RuntimeException("超时等待锁定相机开启。");
             }
 
-            // STEP 4 openCamera
+            // RUNNING STEP 4 openCamera
             assert manager != null;
             manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
         } catch (CameraAccessException e) {
@@ -351,14 +351,14 @@ public class MyCameraActivity extends AppCompatActivity {
                     = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
             mPreviewRequestBuilder.addTarget(surface);
 
-            // STEP 6 createCaptureSession
+            // RUNNING STEP 6 createCaptureSession
             // 在这里，我们为相机预览创建一个CameraCaptureSession。
             mCameraDevice.createCaptureSession(Arrays.asList(surface, mImageReader.getSurface()),
                     new CameraCaptureSession.StateCallback() {
 
                         @Override
                         public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
-                            // STEP 7 onConfigured
+                            // RUNNING STEP 7 onConfigured
                             // 相机已经关闭
                             if (null == mCameraDevice) {
                                 return;
@@ -376,7 +376,7 @@ public class MyCameraActivity extends AppCompatActivity {
                                 // 最后，我们开始显示相机预览。
                                 mPreviewRequest = mPreviewRequestBuilder.build();
 
-                                // STEP 8 setRepeatingRequest
+                                // RUNNING STEP 8 setRepeatingRequest
                                 mCaptureSession.setRepeatingRequest(mPreviewRequest, mCaptureCallback, mBackgroundHandler);
                             } catch (CameraAccessException e) {
                                 e.printStackTrace();
@@ -486,7 +486,7 @@ public class MyCameraActivity extends AppCompatActivity {
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    // STEP 9 onCaptureCompleted
+                    // RUNNING STEP 9 onCaptureCompleted
                     process(result);
                     unlockFocus();
                 }
@@ -619,7 +619,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
         @Override
         public void onOpened(@NonNull CameraDevice cameraDevice) {
-            // STEP 5 Camera onOpened
+            // RUNNING STEP 5 Camera onOpened
             // 当相机打开时调用此方法。 我们在这里开始相机预览。
             mCameraOpenCloseLock.release();
             mCameraDevice = cameraDevice;
