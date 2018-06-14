@@ -259,7 +259,7 @@ public class MyCameraActivity extends AppCompatActivity {
             e.printStackTrace();
         } catch (NullPointerException e) {
             // 当使用Camera2API时，当前会引发NPE，但此代码运行的设备不支持该NPE。
-            ToastMaster.toast("此设备不支持Android最新相机模块Camera2！");
+            showToast("此设备不支持Android最新相机模块Camera2！");
             finish();
         }
     }
@@ -385,7 +385,7 @@ public class MyCameraActivity extends AppCompatActivity {
 
                         @Override
                         public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
-                            ToastMaster.toast("Failed");
+                            showToast("onConfigureFailed");
                         }
                     }, null
             );
@@ -486,8 +486,6 @@ public class MyCameraActivity extends AppCompatActivity {
                 public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                                @NonNull CaptureRequest request,
                                                @NonNull TotalCaptureResult result) {
-                    // RUNNING STEP 9 onCaptureCompleted
-                    process(result);
                     unlockFocus();
                 }
             };
@@ -548,6 +546,15 @@ public class MyCameraActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    private void showToast(final String text){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ToastMaster.toast(text);
+            }
+        });
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -654,14 +661,14 @@ public class MyCameraActivity extends AppCompatActivity {
             imageSaver.setCreateListener(new ImageSaver.OnCreatePhotoListener() {
                 @Override
                 public void onSuccess(File file) {
-                    ToastMaster.toast("Saved: " + file);
+                    showToast("Saved: " + file);
                     final Uri uri = Uri.fromFile(file);
                     sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
                 }
 
                 @Override
                 public void onError(String errorMessage) {
-                    ToastMaster.toast(errorMessage);
+                    showToast(errorMessage);
                 }
             });
 
@@ -685,6 +692,8 @@ public class MyCameraActivity extends AppCompatActivity {
         public void onCaptureCompleted(@NonNull CameraCaptureSession session,
                                        @NonNull CaptureRequest request,
                                        @NonNull TotalCaptureResult result) {
+            // RUNNING STEP 9 onCaptureCompleted
+            process(result);
         }
 
     };
