@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4fb53f</color>
+    <color name="colorPrimaryDark">#497652</color>
+    <color name="colorAccent">#317100</color>
+
+    <!--100%    FF-->
+    <!--95% 	F2-->
+    <!--90% 	E6-->
+    <!--85% 	D9-->
+    <!--80% 	CC-->
+    <!--75%	    BF-->
+    <!--70% 	B3-->
+    <!--65% 	A6-->
+    <!--60% 	99-->
+    <!--55% 	8C-->
+    <!--50% 	80-->
+    <!--45% 	73-->
+    <!--40% 	66-->
+    <!--35% 	59-->
+    <!--30% 	4D-->
+    <!--25% 	40-->
+    <!--20% 	33-->
+    <!--15% 	26-->
+    <!--10% 	1A-->
+    <!--5%  	0D-->
+    <!--0%  	00-->
+
+    <color name="black">#000000</color>
+    <color name="black_alpha_80">#CC000000</color>
+    <color name="black_alpha_60">#99000000</color>
+    <color name="black_alpha_40">#66000000</color>
+    <color name="black_alpha_30">#4D000000</color>
+    <color name="black_alpha_5">#0D000000</color>
+    <color name="black_alpha_0">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="color_FCFCFC">#FCFCFC</color>
+    <color name="color_D1D1D1">#D1D1D1</color>
+
+    <color name="control_background">#cc4285f4</color>
+</resources>
